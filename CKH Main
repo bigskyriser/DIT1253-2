@@ -5,13 +5,17 @@
 #include<time.h>
 #include<chrono>
 #include<thread>
+#include<iomanip>
 using namespace std;
+
+//All definitions go here:
+int lol;
+int pc, quan, q2, subt;
+char mem;
+int option;
 
 int main()
 {
-	char mem;
-	int option;
-
 	printf("Initialising...\n");
 	using namespace std::this_thread;
 	using namespace std::chrono;
