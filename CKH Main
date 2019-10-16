@@ -14,6 +14,20 @@ int pc, quan, q2, subt;
 char mem;
 int option;
 
+int price()
+{
+	printf("+--------------+---------------------+------------------+------------------+\n");
+	printf("| Product Code | Product Description | Retail Price(RM) | Special Discount |\n");
+	printf("+--------------+---------------------+------------------+------------------+\n");
+	printf("|     101      |    Wall Scrapper    |      100.0       |        -         |\n");
+	printf("|     202      |     Tiles Waxes     |      350.0       |        -         |\n");
+	printf("|     303      |   Mud/Tar Remover   |      500.0       |   20%% Discount   |\n");
+	printf("|     404      |      Dry Blower     |      850.0       |   25%% Discount   |\n");
+	printf("+--------------+---------------------+------------------+------------------+\n");
+	system("pause");
+	return 0;
+}
+
 int main()
 {
 	printf("Initialising...\n");
