@@ -13,6 +13,7 @@ int lol;
 int pc, quan, q2, subt;
 char mem;
 int option;
+int mcount=1;//Loop counter
 
 int price()
 {
@@ -43,35 +44,38 @@ int main()
 	printf("Do you have a membership? (Y/N)\n");
 	cin >> mem;
 	
-	printf("Select Options:\n");
-	printf("1) Product & Price Details\n2) Price Calculator\n3) Delivery Charge Calculator\n");
-	printf("4) Total Pay Amount Calculator\n5) Exit\nOption: ");
-	cin >> option;
-	switch (option)
+	while (mcount < 300)
 	{
-		case 1:
-			printf("Product Listing\n");
-			price();
-			break;
-		case 2:
-			printf("Price Calculator\n");
-			pcalc();
-			break;
-		case 3:
-			printf("Delivery\n");
-			break;
-		case 4:
-			printf("Total payment\n");
-			break;
-		case 5:
-			printf("Exit\n");
-			break;
-		default:
-			printf("Error\n");
+		printf("Select Options:\n");
+		printf("1) Product & Price Details\n2) Price Calculator\n3) Delivery Charge Calculator\n");
+		printf("4) Total Pay Amount Calculator\n5) Exit\nOption: ");
+		cin >> option;
+		switch (option)
+		{
+			case 1:
+				printf("Product Listing\n");
+				price();
+				break;
+			case 2:
+				printf("Price Calculator\n");
+				pcalc();
+				break;
+			case 3:
+				printf("Delivery\n");
+				break;
+			case 4:
+				printf("Total payment\n");
+				break;
+			case 5:
+				printf("Exit\n");
+				return 0;
+				break;
+			default:
+				printf("Error\n");
+				system("Pause");
+		}
+		printf("You selected option %d\n", option);
 	}
-	printf("You selected option %d\n", option);
-
-	return 0;
 }
 
 //By Group Rendang
