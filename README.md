@@ -77,7 +77,7 @@ int pcalc()//Option 2
 		}
 		printf("Anymore items to add? (Y/N)\n");
 		scanf_s("%c", &ta);
-
+		
 		if (ta == 'Y')
 		{
 			;
