@@ -4,20 +4,25 @@ Programming assignment 2. DEADLINE 25-10-2019 (FRIDAY)
 #include<stdio.h>
 #include<stdlib.h>
 #include<conio.h>
-#include<iostream>
 #include<time.h>
+#include<iostream>
 #include<chrono>//WARNING!! DOES NOT WORK ON VISUAL STUDIO 2010!!
 #include<thread>
-#include<iomanip>
 using namespace std;
 
-//All definitions go here:
-float q2, subt, v1, v2, v3, v31, v4, v41;//Option 2
+//All definitions (except arrays) go here:
+float q2, pcost, v3, v4;//Option 2
 float dist, dcost;//Option 3
+float subt, gt, gp;//Option 4
 char mem;
 char ta;
-int option, pc, quan;
+int option, pc;
+int c22 = 0;//Array counter
 int mcount =1;//Loop counter
+
+//Arrays go here:
+int o2101[64], o2202[64], o2303[64], o2404[64];
+float v1[64], v2[64], v31[64], v41[64];
 
 int price()//Option 1
 {
@@ -35,77 +40,80 @@ int price()//Option 1
 
 int pcalc()//Option 2
 {
-	while (mcount < 255)
+	for (c22 =1; c22 <64; c22++)
 	{
 		printf("Enter product code, followed by quantity:\nProduct Code: ");
-		cin >> pc;
+		scanf_s("%d", &pc);
 		switch (pc)
 		{
 			case 101:
-				cout << "Quantity: ";
-				cin >> quan;
-				v1 = quan * 100;
-				cout << setprecision(2) << fixed << "Cost is " << v1 <<"\n";
+				printf("Quantity: ");
+				scanf_s("%d", &o2101[c22]);
+				v1[c22] = o2101[c22] * 100;
+				printf("Cost is: RM%.2f\n", v1[c22]);
 				break;
 			case 202:
-				cout << "Quantity: ";
-				cin >> quan;
-				v2 = quan * 350;
-				cout << setprecision(2) << fixed << "Cost is " << v2 << "\n";
+				printf("Quantity: ");
+				scanf_s("%d", &o2202[c22]);
+				v2[c22] = o2202[c22] * 350;
+				printf("Cost is RM%.2f\n", v2[c22]);
 				break;
 			case 303:
-				cout << "Quantity: ";
-				cin >> quan;
-				v3 = quan * 500;
-				v31 = v3 * 0.8;
-				cout << setprecision(2) << fixed << "Cost is " << v31 << "\n";
+				printf("Quantity: ");
+				scanf_s("%d", &o2303[c22]);
+				v3 = o2303[c22] * 500;
+				v31[c22] = v3 * 0.8;
+				printf("Cost is RM%.2f\n", v31[c22]);
 				break;
 			case 404:
-				cout << "Quantity: ";
-				cin >> quan;
-				v4 = quan * 850;
-				v41 = v4 * 0.75;
-				cout << setprecision (2) << fixed << "Cost is " << v41 << "\n";
+				printf("Quantity: ");
+				scanf_s("%d", &o2404[c22]);
+				v4 =o2404[c22]* 850;
+				v41[c22] = v4 * 0.75;
+				printf("Cost is RM%.2f\n", v41[c22]);
 				break;
 			default:
 				printf("Error\n%d is a non-existent product!\n", pc);
-				break;
 		}
 		printf("Anymore items to add? (Y/N)\n");
-		cin >> ta;
-		switch (ta)
+		scanf_s("%c", &ta);
+
+		if (ta == 'Y')
 		{
-			case 'Y':
-				break;
-			case 'N':
-				subt = v1 + v2 + v31 + v41;
-				cout <<setprecision (2) << fixed << "Subtotal is RM" << subt << "\n";
-				system("pause");
-				return 0;
-				break;
+			;
+		}
+		else
+		{
+			break;
 		}
 	}
-		system("pause");
-		return 0;
+	for (c22 = 1; c22 < 64; c22++)
+	{
+		pcost += v1[c22] + v2[c22] + v31[c22] + v41[c22];
+	}
+	printf("Subtotal is RM%.2f\n", pcost);
+	system("pause");
+	return 0;
 }
 
 int dccal()//Option 3
 {
-	cout << "First 30KM=RM50\nAdditional RM3.00 per KM for every subsequent KM\n";
-	cout << "Delivery beyond 100KM from the mall is not available\nDistance(KM):";
-	cin >> dist;
+	printf("First 30KM=RM50\nAdditional RM3.00 per KM for every subsequent KM\n");
+	printf("Delivery beyond 100KM from the mall is not available\nDistance(KM):");
+	scanf_s("%f", &dist);
 	if (dist <= 30)
 	{
-		cout << "Delivery charge is RM50.00\n";
+		printf("Delivery charge is RM50.00\n");
+		dcost = 50.00;
 	}
 	else if (dist > 30 && dist <= 100)
 	{
 		dcost = 50 + ((dist - 30) * 3);
-		cout << "Delivery charge is RM" << dcost << "\n";
+		printf("Delivery charge is RM%.2f\n", dcost);
 	}
 	else
 	{
-		cout << "Delivery beyond 100KM not available\n";
+		printf("Delivery beyond 100KM not available\n");
 	}
 	system("pause");
 	return 0;
@@ -113,7 +121,40 @@ int dccal()//Option 3
 
 int tcalc()//Option 4
 {
-	cout << "WIP\n";
+	subt = pcost + dcost;
+	gt = subt * 0.1;
+	gp = subt * 1.1;
+	printf("+---------------+\n");
+	printf("| Products(RM)  |%.2f\n", pcost);
+	printf("| Delivery(RM)  |%.2f\n", dcost);
+	printf("+---------------+\n");
+	printf("| Subtotal(RM)  |%.2f\n", subt);
+	printf("| 10%% Gov. Tax  |%.2f\n", gt);
+	printf("|Grand Price(RM)|%.2f\n", gp);
+	printf("+---------------+\n");
+	if (mem == 'Y')
+	{
+		if (gp >= 800 && gp <= 1000)
+		{
+			gp *= 0.9;
+			printf("\nMember Discount 10%%\n+---------------+\n");
+			printf("|Grand Price(RM)|%.2f\n+---------------+\n", gp);
+		}
+		else if (gp > 1000)
+		{
+			gp *= 0.88;
+			printf("\nMember Discount 12%%\n+---------------+\n");
+			printf("|Grand Price(RM)|%.2f\n+---------------+\n", gp);
+		}
+		else
+		{
+			;
+		}
+	}
+	else
+	{ }
+	system("pause");
+	return 0;
 }
 int main()//Main Menu
 {
@@ -128,14 +169,14 @@ int main()//Main Menu
 	printf("_#____#__#______\n_#____#__#______\n_#####___#______\n");
 	printf("BEST PRICE MALL\n");
 	printf("Do you have a membership? (Y/N)\n");
-	cin >> mem;
+	scanf_s("%c", &mem);
 	
 	while (mcount < 255)
 	{
 		printf("Select Options:\n");
 		printf("1) Product & Price Details\n2) Price Calculator\n3) Delivery Charge Calculator\n");
 		printf("4) Total Pay Amount Calculator\n5) Exit\nOption: ");
-		cin >> option;
+		scanf_s("%d", &option);
 		switch (option)
 		{
 		case 1:
@@ -152,6 +193,7 @@ int main()//Main Menu
 			break;
 		case 4:
 			printf("Total payment\n");
+			tcalc();
 			break;
 		case 5:
 			printf("Exiting\n");
@@ -161,7 +203,6 @@ int main()//Main Menu
 			printf("Error\n");
 			system("pause");
 		}
-		printf("You selected option %d\n", option);
 	}
 
 }
